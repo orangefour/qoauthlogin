@@ -1,0 +1,1 @@
+OAuth 2.0 Login library for Qt applications. At the moment supports Google and Facebook on iOS. SDKs are included in the repository.
