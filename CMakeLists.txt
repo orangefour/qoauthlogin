@@ -1,0 +1,6 @@
+find_package(Qt5 COMPONENTS Core REQUIRED)
+file(GLOB SOURCES *.cpp)
+add_library(qoauthlogin SHARED ${SOURCES})
+set_property(TARGET qoauthlogin PROPERTY CXX_STANDARD 11)
+target_include_directories(qoauthlogin PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+qt5_use_modules(qoauthlogin Core)
