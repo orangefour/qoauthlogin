@@ -31,3 +31,7 @@ ios {
     -framework SafariServices \
     -framework SystemConfiguration
 }
+
+android {
+  QT += androidextras
+}
