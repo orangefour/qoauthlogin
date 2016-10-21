@@ -34,4 +34,5 @@ ios {
 
 android {
   QT += androidextras
+  SOURCES += $$PWD/loginandroid.cpp
 }
