@@ -1,3 +1,5 @@
+#include <QtGlobal>
+#ifdef Q_OS_ANDROID
 #include "google.h"
 #include "facebook.h"
 #include <jni.h>
@@ -14,20 +16,24 @@ JNIEXPORT void JNICALL
   Java_at_metr_app_MyJavaNatives_googleTokenReady(JNIEnv* env,
                                                   jobject /*obj*/,
                                                   jstring token) {
-  QString qstr(env->GetStringUTFChars(token, 0));
+  auto bytes = env->GetStringUTFChars(token, 0);
+  auto length = env->GetStringUTFLength(token);
   if (g_google) {
-    emit g_google->tokenReady(qstr);
+    emit g_google->tokenReady(QString::fromUtf8(bytes, length));
   }
+  env->ReleaseStringUTFChars(token, bytes);
 }
 
 JNIEXPORT void JNICALL
   Java_at_metr_app_MyJavaNatives_facebookTokenReady(JNIEnv* env,
                                                     jobject /*obj*/,
                                                     jstring token) {
-  QString qstr(env->GetStringUTFChars(token, 0));
+  auto bytes = env->GetStringUTFChars(token, 0);
+  auto length = env->GetStringUTFLength(token);
   if (g_facebook) {
-    emit g_facebook->tokenReady(qstr);
+    emit g_facebook->tokenReady(QString::fromUtf8(bytes, length));
   }
+  env->ReleaseStringUTFChars(token, bytes);
 }
 
 #ifdef __cplusplus
@@ -62,3 +68,4 @@ void Google::login() {
     }
   });
 }
+#endif
